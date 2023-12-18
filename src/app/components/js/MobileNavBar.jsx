@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import '../css/NavBar.css'
 import { Link, NavLink } from 'react-router-dom';
 import { useLogin } from '../../context/LoginContext';
-import MobileNavBar from './MobileNavBar';
 
 
 
-function NavBar() {
+function MobileNavBar() {
   const { logout } = useLogin();
   const { isLogin, setIsLogin } = useLogin();
   //console.log("Log : "+isLogin)
@@ -35,14 +34,66 @@ function NavBar() {
 
   return (
     <>
-      {isMobile ? <MobileNavBar/>:
-      
-      
 
       <nav
         style={{ background: '#F0FFFF' }}
         className='Container  sticky-top navCSS'>
-        
+        {sessionStorage.getItem('isLogin') ? (
+          <div>
+            {
+              sessionStorage.getItem('Role') == 'Admin' ? (
+                <>
+                  <a style={{ color: '#116D6E' }} className='float-start menuNav' data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                    <span style={{ background: '' }} className="material-symbols-outlined">
+                      menu
+                    </span>
+                  </a>
+                </>
+              ) : (<></>)
+            }
+
+
+            {
+              sessionStorage.getItem('Role') == 'User' ? (
+                <>
+                  <a style={{ color: '#116D6E' }} className='float-start menuNav' data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                    <span style={{ background: '' }} className="material-symbols-outlined">
+                      menu
+                    </span>
+
+                  </a>
+                </>
+              ) : (<></>)
+            }
+            {
+              sessionStorage.getItem('Role') == 'SupperAdmin' ? (
+                <>
+                  <a style={{ color: '#116D6E' }} className='float-start menuNav' data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                    <span style={{ background: '' }} className="material-symbols-outlined">
+                      menu
+                    </span>
+
+                  </a>
+                </>
+              ) : (<></>)
+            }
+            {
+              sessionStorage.getItem('Role') == 'Vendor' ? (
+                <>
+                  <a style={{ color: '#116D6E' }} className='float-start menuNav' data-bs-toggle="offcanvas" href="#offcanvasExampleVendor" role="button" aria-controls="offcanvasExample">
+                    <span style={{ background: '' }} className="material-symbols-outlined">
+                      menu
+                    </span>
+
+                  </a>
+                </>
+              ) : (<></>)
+            }
+          </div>
+
+
+        ) : (<></>)
+        }
         <Link to={'/'}
         >
           <div className='float-start'>
@@ -284,7 +335,7 @@ function NavBar() {
         </div> */}
 
       </nav >
-      }
+
 
       {/* ************************************************************************************************************************ */}
 
@@ -329,4 +380,4 @@ function NavBar() {
   )
 }
 
-export default NavBar;
+export default MobileNavBar;

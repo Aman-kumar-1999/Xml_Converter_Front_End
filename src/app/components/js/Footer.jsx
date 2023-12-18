@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function Footer() {
   return (
     <>
-    <MDBFooter bgColor='#116D6E' className='text-center text-lg-start  footer'>
+    <MDBFooter  style={{boxShadow:'0px 0px 50px #8d8a8a'}} bgColor='#116D6E' className='text-center text-lg-start  footer'>
                 {/* <section className='d-flex justify-content-center justify-content-lg-between p-4 border-bottom'>
                     <div className='me-5 d-none d-lg-block'>
                         <span>

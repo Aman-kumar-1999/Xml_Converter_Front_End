@@ -12,9 +12,8 @@ import { LoginProvider } from './app/context/LoginContext'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import SideBar from './app/components/js/pages/SideBar'
-import MobileApp from './MobileApp'
 
-function App() {
+function MobileApp() {
 
   const [users, setUser] = useState([])
   const addUser = (users) => {
@@ -76,11 +75,6 @@ function App() {
 
   return (
     <>
-      {isMobile 
-      ?(<MobileApp/>)
-      :(<>
-      
-      
       <LoginProvider value={{ isLogin, setIsLogin, logout }}>
         <UserProvider value={{ users, addUser, updateUser, deleteUser }}>
           <ToastContainer />
@@ -88,7 +82,7 @@ function App() {
             <div className="container-fluid text-center">
               <div className="row">
                 <NavBar />
-                <div className="col-2">
+                <div className="col-1">
                   <ul className="list-group list-group-flush">
 
                     {(sessionStorage.getItem('isLogin'))
@@ -100,12 +94,12 @@ function App() {
 
                   </ul>
                 </div>
-                <div className="col-8">
+                <div className="col-10">
                   <div className="routerCSS">
                     <Outlet />                 
                   </div>
                 </div>
-                <div className="col-2">
+                <div className="col-1">
                 </div>
                 <Footer className='' />
               </div>
@@ -113,9 +107,8 @@ function App() {
           </div>
         </UserProvider>
       </LoginProvider >
-      </>)}
     </>
   )
 }
 
-export default App
+export default MobileApp

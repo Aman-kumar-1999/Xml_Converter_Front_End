@@ -2,6 +2,11 @@
 .login{
     justify-items: center;
     display: grid;
+    
+}
+
+.login-icon{
+    text-align: center;
 }
 
 
@@ -32,10 +37,14 @@ input {
     outline: none;
     border-radius: 5px;
 }
+.button{
+    background:#116D6E;
+    color: white;
+}
 
 
 .button:hover {
-    background: #116D6E;
+    background: #0d4d4e;
     color: white;
 }
 
@@ -51,4 +60,22 @@ input {
 .nav-link{
     /* color: rgb(199, 98, 98); */
     text-decoration: none;
+}
+
+.login-card{
+    
+    border: white;
+    /* box-shadow: 10px 20px 50px #8d8a8a; */
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
+    border-bottom: 10px solid #116D6E;
+    /* border-top: 10px solid #116D6E;
+    border-left: 10px solid #116D6E;
+    border-right: 10px solid #116D6E; */
+    
+    
+
 }
