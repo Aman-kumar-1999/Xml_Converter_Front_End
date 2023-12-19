@@ -3,6 +3,39 @@
 // let baseUrl='http://codea2z.online:5002'
 
 // test
-let baseUrl='http://localhost:8902'
+// let baseUrl='http://localhost:8902'
 
-export default baseUrl;
+// export default baseUrl;
+
+
+import axios from "axios";
+import { getToken } from "../auth";
+export const BASE_URL = "http://localhost:8902";
+// export const BASE_URL = "http://localhost:9292/api/v1";
+// export const BASE_URL = "https://apis.lcwdblogs.online/api/v1";
+
+export const myAxios = axios.create({
+  baseURL: BASE_URL,
+});
+
+export const privateAxios = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${getToken()}`, // Replace with your actual access token
+  },
+});
+
+// privateAxios.interceptors.request.use(
+//   (config) => {
+//     const token = getToken();
+//     console.log("Axios Token : "+token)
+//     if (token != null) {
+//       config.headers.common.Authorization = `Bearer ${token}`;
+//       console.log(config);
+//     }
+
+//     return config;
+//   },
+//   (error) => Promise.reject(error)
+// );

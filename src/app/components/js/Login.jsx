@@ -4,13 +4,20 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../css/Login.css'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import baseUrl from '../../helper/helper';
+// import baseUrl from '../../helper/helper';
 // import ForgetPassword from '../../pages/view/ForgetPassword';
 import axios from 'axios';
 import { useLogin } from '../../context/LoginContext';
+import { doLogin } from '../../auth';
+import { useContext } from 'react';
+import userContext from '../../context/userContext';
+import { loginUser } from '../../services/user-service';
 // import { Box, LinearProgress } from '@mui/material';
 
 const Login = () => {
+
+
+  const userContxtData = useContext(userContext);
 
   const { isLogin, setIsLogin, logout } = useLogin();
   const [formData, setFormData] = useState({
@@ -39,7 +46,10 @@ const Login = () => {
 
 
   // useEffect(() => {
+  //     return () => {
 
+  //       console.log("Hello");
+  //     }
   // }, [])
 
 
@@ -48,78 +58,123 @@ const Login = () => {
   // const [isLoggedIn, setIsLoggedIn] = useState(false); // State variable to track login status
   var isLoggedIn = false;
 
-  const handleFormSubmit = async (event) => {
+  // const handleFormSubmit = async (event) => {
+  //   event.preventDefault();
+
+  //   try {
+
+  //     if (formData.username == null || formData.username == '') {
+  //       toast('Kindly Enter User Name', {
+  //         position: 'top-center'
+  //       });
+
+  //     }
+  //     else if (formData.password == null || formData.password == '') {
+  //       toast('Kindly Enter Password', {
+  //         position: 'top-center'
+  //       });
+  //     }
+  //     else {
+  //       setLoading(true);
+  //       const response = await axios.post(`${baseUrl}/generate-token`,
+  //         formData
+  //       );
+
+
+  //       const jsonData = await response.data;
+
+  //       // Handle successful login response
+
+  //       console.log(jsonData);
+  //       if (jsonData) {
+
+  //         setLoading(false);
+
+  //         sessionStorage.setItem('token', jsonData.token);
+  //         sessionStorage.setItem('Role', jsonData.USER.authorities[0].authority)
+  //         // sessionStorage.setItem('loginUser', jsonData.USER);
+  //         sessionStorage.setItem('loginUser', JSON.stringify(jsonData.USER));
+  //         isLoggedIn = true
+  //         setIsLogin(true)
+  //         // sessionStorage.setItem('isLoggedIn', isLoggedIn);
+  //         //console.log('is logged In : ' + sessionStorage.getItem('loginUser'));
+  //         //console.log('is logged In : ' + sessionStorage.getItem('isLoggedIn'));
+  //         // if (
+  //         //   jsonData.USER.role.roleName == 'Admin'
+  //         // ) {
+  //         //   navigate('/dashboard',JSON.stringify(jsonData.USER))
+  //         // } else {
+  //         //   navigate('/',JSON.stringify(jsonData.USER))
+  //         // }
+  //         navigate('/home')
+  //         // window.location.reload();
+  //         // sessionStorage.clear();
+  //         // sessionStorage.getItem('isLoggedIn');
+  //       }
+  //       else {
+  //         setLoading(false);
+  //         toast('Password is Invalid', {
+  //           position: 'top-center'
+  //         });
+  //       }
+  //       // } else {
+
+  //       //   throw new Error('Failed to login');
+  //       // }
+  //     }
+  //   } catch (err) {
+  //     // Handle error
+  //     toast('Server is down', {
+  //       position: 'top-center'
+  //     });
+  //     console.error(err);
+  //   }
+  // }
+
+  const handleFormSubmit = (event) => {
     event.preventDefault();
-
-    try {
-
-      if (formData.username == null || formData.username == '') {
-        toast('Kindly Enter User Name', {
-          position: 'top-center'
-        });
-
-      }
-      else if (formData.password == null || formData.password == '') {
-        toast('Kindly Enter Password', {
-          position: 'top-center'
-        });
-      }
-      else {
-        setLoading(true);
-        const response = await axios.post(`${baseUrl}/generate-token`,
-          formData
-        );
-
-
-        const jsonData = await response.data;
-
-        // Handle successful login response
-
-        console.log(jsonData);
-        if (jsonData) {
-
-          setLoading(false);
-
-          sessionStorage.setItem('token', jsonData.token);
-          sessionStorage.setItem('Role', jsonData.USER.authorities[0].authority)
-          // sessionStorage.setItem('loginUser', jsonData.USER);
-          // sessionStorage.setItem('loginUser', JSON.stringify(jsonData.USER));
-          isLoggedIn = true
-          setIsLogin(true)
-          // sessionStorage.setItem('isLoggedIn', isLoggedIn);
-          //console.log('is logged In : ' + sessionStorage.getItem('loginUser'));
-          //console.log('is logged In : ' + sessionStorage.getItem('isLoggedIn'));
-          // if (
-          //   jsonData.USER.role.roleName == 'Admin'
-          // ) {
-          //   navigate('/dashboard',JSON.stringify(jsonData.USER))
-          // } else {
-          //   navigate('/',JSON.stringify(jsonData.USER))
-          // }
-          navigate('/home')
-          // window.location.reload();
-          // sessionStorage.clear();
-          // sessionStorage.getItem('isLoggedIn');
-        }
-        else {
-          setLoading(false);
-          toast('Password is Invalid', {
-            position: 'top-center'
-          });
-        }
-        // } else {
-
-        //   throw new Error('Failed to login');
-        // }
-      }
-    } catch (err) {
-      // Handle error
-      toast('Server is down', {
-        position: 'top-center'
-      });
-      console.error(err);
+    console.log(formData);
+    //validation
+    if (
+      formData.username.trim() == "" ||
+      formData.password.trim() == ""
+    ) {
+      toast.error("Username or Password  is required !!");
+      return;
     }
-  }
+
+    //submit the data to server to generate token
+    loginUser(formData)
+      .then((data) => {
+        //console.log(data);
+
+        //save the data to localstorage
+        doLogin(data, () => {
+          //console.log("login detail is saved to localstorage");
+          //redirect to user dashboard page
+          userContxtData.setUser({
+            data: data,
+            login: true,
+          });
+          setIsLogin(true)
+          sessionStorage.setItem('token', data.token);
+          sessionStorage.setItem('Role', data.USER.authorities[0].authority)
+          // sessionStorage.setItem('loginUser', jsonData.USER);
+          sessionStorage.setItem('loginUser', JSON.stringify(data.USER));
+          navigate("/dashboard");
+        });
+
+        toast.success("Login Success");
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status == 400 || error.response.status == 404) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("Something went wrong  on sever !!");
+        }
+      });
+  };
 
 
   const handleInputChange = (event) => {
@@ -143,7 +198,7 @@ const Login = () => {
               <form className='mb-4' >
                 <label className="label" aria-hidden="true">Login Page</label>
                 <div className='text-center'>
-                  <span className="material-symbols-outlined" style={{fontSize:"100px"}}>
+                  <span className="material-symbols-outlined" style={{ fontSize: "100px" }}>
                     passkey
                   </span>
                 </div>

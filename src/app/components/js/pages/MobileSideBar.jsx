@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import '../../css/SideBar.css';
 
 export default function MobileSideBar() {
@@ -79,13 +79,17 @@ export default function MobileSideBar() {
 
                                             <Link className='' to={'/editUserImage'}><span className='material-symbols-outlined sidebarLogo' data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home">edit_square</span></Link>
                                         </div>
-                                        <h6 id='name'>Aman Kumar</h6>
-                                        <h6 id='post'>Developer</h6>
+                                        <h6 id='name'>{JSON.parse(sessionStorage.getItem('loginUser')).firstName} {JSON.parse(sessionStorage.getItem('loginUser')).lastName}</h6>
+                                        <h6 id='post'>{JSON.parse(sessionStorage.getItem('loginUser')).profile}</h6>
                                         <h6 id='post'>{sessionStorage.getItem('Role')}</h6>
                                     </li>
                                 </ul>
 
-                                <Link to={'/home'} className='link'><li className="list-group-item sidebar "> <span className='material-symbols-outlined sidebarLogo'>home_app_logo</span>Home</li></Link>
+                                <NavLink to={'/home'} className='link'><li className="list-group-item sidebar "  data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="pills-home" aria-selected="true"> <span className='material-symbols-outlined sidebarLogo'>home_app_logo</span>Home</li></NavLink>
+
+                                <NavLink to={'/profile'} className='link'><li className="list-group-item sidebar "  data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="pills-home" aria-selected="true"> <span className='material-symbols-outlined sidebarLogo'>settings_account_box</span>Profile</li></NavLink>
+
+                                <NavLink to={'/dashboard'} className='link'><li className="list-group-item sidebar "  data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="pills-home" aria-selected="true"> <span className='material-symbols-outlined sidebarLogo'>home_app_logo</span>Dashboard</li></NavLink>
                         
 
                             </div>

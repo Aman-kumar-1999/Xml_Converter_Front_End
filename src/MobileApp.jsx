@@ -4,14 +4,15 @@ import viteLogo from '/vite.svg'
 
 import './App.css'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { UserProvider } from './app/context/UserContext'
+// import { UserProvider } from './app/context/UserContext'
 import NavBar from './app/components/js/NavBar'
 import Footer from './app/components/js/Footer'
-import baseUrl from './app/helper/helper'
+// import baseUrl from './app/helper/helper'
 import { LoginProvider } from './app/context/LoginContext'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import SideBar from './app/components/js/pages/SideBar'
+import UserProvider from './app/context/UserProvider'
 
 function MobileApp() {
 
@@ -76,7 +77,7 @@ function MobileApp() {
   return (
     <>
       <LoginProvider value={{ isLogin, setIsLogin, logout }}>
-        <UserProvider value={{ users, addUser, updateUser, deleteUser }}>
+        <UserProvider >
           <ToastContainer />
           <div>
             <div className="container-fluid text-center">

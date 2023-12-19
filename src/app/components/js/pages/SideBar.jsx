@@ -70,13 +70,18 @@ export default function SideBar() {
 
                                         <Link className='' to={'/editUserImage'}><span className='material-symbols-outlined sidebarLogo' data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home">edit_square</span></Link>
                                     </div>
-                                    <h6 id='name'>Aman Kumar</h6>
-                                    <h6 id='post'>Developer</h6>
+                                    <h6 id='name'>{JSON.parse(sessionStorage.getItem('loginUser')).firstName} {JSON.parse(sessionStorage.getItem('loginUser')).lastName}</h6>
+                                    <h6 id='post'>{JSON.parse(sessionStorage.getItem('loginUser')).profile}</h6>
                                     <h6 id='post'>{sessionStorage.getItem('Role')}</h6>
                                 </li>
                             </ul>
 
-                            <NavLink to={'/home'} className='link'><li className="list-group-item sidebar "> <span className='material-symbols-outlined sidebarLogo'>home_app_logo</span>Home</li></NavLink>
+                            <Link to={'/home'} className='link'><li className="list-group-item sidebar " data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="pills-home" aria-selected="true"> <span className='material-symbols-outlined sidebarLogo'>home_app_logo</span>Home</li></Link>
+
+                            <Link to={'/profile'} className='link'><li className="list-group-item sidebar " data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="pills-home" aria-selected="true"> <span className='material-symbols-outlined sidebarLogo'>settings_account_box</span>Profile</li></Link>
+
+                            <Link to={'/dashboard'} className='link'><li className="list-group-item sidebar " data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="pills-home" aria-selected="true"> <span className='material-symbols-outlined sidebarLogo'>home_app_logo</span>Dashboard</li></Link>
+
                         </div>
                         : (
                             <></>
@@ -84,18 +89,8 @@ export default function SideBar() {
 
                 }
 
-                {/* <div className="container">
+                
 
-                <div class="list-group">
-                    <button type="button" class="list-group-item list-group-item-action">
-                        Home
-                    </button>
-                    <button type="button" class="list-group-item list-group-item-action">About</button>
-                    <button type="button" class="list-group-item list-group-item-action">Profile</button>
-                    <button type="button" class="list-group-item list-group-item-action">Notification</button>
-                    <button type="button" class="list-group-item list-group-item-action">Files</button>
-                </div>
-            </div> */}
             </>)}
         </>
     )

@@ -7,6 +7,8 @@ import Login from './app/components/js/Login.jsx'
 import ForgotPassword from './app/components/js/ForgotPassword.jsx';
 import Home from './app/components/js/pages/Home.jsx';
 import B404 from './app/components/js/B404.jsx';
+import Profile from './app/components/js/pages/Profile.jsx'
+import Dashboard from './app/components/js/pages/Dashboard.jsx';
 
 
 
@@ -21,6 +23,8 @@ const router = createBrowserRouter(
      
       <Route path="/forgotPassword" element={<ForgotPassword />} />
       <Route path="/home" element={<Home />} />
+      <Route path='/profile' element={<Profile/>}/>
+      <Route path='/dashboard' element={<Dashboard/>}/>
       {/* <Route
      path='/admin' element={<App/>}>
       <Route path='' element={< Login />}/>

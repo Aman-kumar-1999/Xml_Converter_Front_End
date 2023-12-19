@@ -4,15 +4,16 @@ import viteLogo from '/vite.svg'
 
 import './App.css'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { UserProvider } from './app/context/UserContext'
+// import { UserProvider } from './app/context/UserContext'
 import NavBar from './app/components/js/NavBar'
 import Footer from './app/components/js/Footer'
-import baseUrl from './app/helper/helper'
+// import baseUrl from './app/helper/helper'
 import { LoginProvider } from './app/context/LoginContext'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import SideBar from './app/components/js/pages/SideBar'
 import MobileApp from './MobileApp'
+import UserProvider from './app/context/UserProvider'
 
 function App() {
 
@@ -37,15 +38,15 @@ function App() {
 
   const [isMobile, setIsMobile] = useState(false);
 
-    useEffect(() => {
-        const handleResize = () => {
-            const isMobileDevice = window.innerWidth <= 600; // Change 600 to your desired breakpoint
-            setIsMobile(isMobileDevice);
-        };
-        window.addEventListener('resize', handleResize);
-        handleResize(); // Check initial screen size
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobileDevice = window.innerWidth <= 600; // Change 600 to your desired breakpoint
+      setIsMobile(isMobileDevice);
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Check initial screen size
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
 
   //  Login form handle Golobly 
@@ -76,44 +77,45 @@ function App() {
 
   return (
     <>
-      {isMobile 
-      ?(<MobileApp/>)
-      :(<>
-      
-      
-      <LoginProvider value={{ isLogin, setIsLogin, logout }}>
-        <UserProvider value={{ users, addUser, updateUser, deleteUser }}>
-          <ToastContainer />
-          <div>
-            <div className="container-fluid text-center">
-              <div className="row">
-                <NavBar />
-                <div className="col-2">
-                  <ul className="list-group list-group-flush">
+      {isMobile
+        ? (<MobileApp />)
+        : (<>
 
-                    {(sessionStorage.getItem('isLogin'))
-                      ? (<>
-                        <SideBar />
-                      </>)
-                      : (<></>)
-                    }
 
-                  </ul>
-                </div>
-                <div className="col-8">
-                  <div className="routerCSS">
-                    <Outlet />                 
+          <LoginProvider value={{ isLogin, setIsLogin, logout }}>
+            <UserProvider>
+              <ToastContainer />
+              <div>
+                <div className="container-fluid text-center">
+                  <div className="row">
+                    <NavBar />
+                    <div className="col-2">
+                      <ul className="list-group list-group-flush">
+
+                        {(sessionStorage.getItem('isLogin'))
+                          ? (<>
+                            <SideBar />
+                          </>)
+                          : (<></>)
+                        }
+
+                      </ul>
+                    </div>
+                    <div className="col-8">
+                      <div className="routerCSS">
+                        <Outlet />
+                      </div>
+                    </div>
+                    <div className="col-2">
+                    </div>
+                    <Footer className='' />
                   </div>
                 </div>
-                <div className="col-2">
-                </div>
-                <Footer className='' />
               </div>
-            </div>
-          </div>
-        </UserProvider>
-      </LoginProvider >
-      </>)}
+            </UserProvider>
+          </LoginProvider >
+
+        </>)}
     </>
   )
 }
