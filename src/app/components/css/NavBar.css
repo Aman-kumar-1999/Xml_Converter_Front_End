@@ -258,6 +258,7 @@
   
   .navCSS{
     box-shadow: 5px 10px 10px #b1adad;
+    /* border-bottom: 5px solid #222222; */
   }
   
   input[type="search"] {

@@ -153,7 +153,7 @@ const Login = () => {
           //console.log("login detail is saved to localstorage");
           //redirect to user dashboard page
           userContxtData.setUser({
-            data: data,
+            data: JSON.stringify(data),
             login: true,
           });
           setIsLogin(true)

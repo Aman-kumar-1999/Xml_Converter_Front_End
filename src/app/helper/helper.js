@@ -22,7 +22,8 @@ export const privateAxios = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${getToken()}`, // Replace with your actual access token
+    // 'Access-Control-Allow-Origin':"*",
+    'Authorization': `Bearer ${sessionStorage.getItem('token')}`, // Replace with your actual access token
   },
 });
 

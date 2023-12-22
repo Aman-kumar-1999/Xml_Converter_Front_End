@@ -5,6 +5,8 @@ import '../../css/SideBar.css';
 
 export default function MobileSideBar() {
 
+    
+
     const [open, setOpen] = useState(false);
     const [scroll, setScroll] = useState('paper');
     // var userData = JSON.parse(localStorage.getItem('loginUser'))
@@ -85,7 +87,7 @@ export default function MobileSideBar() {
                                     </li>
                                 </ul>
 
-                                <NavLink to={'/home'} className='link'><li className="list-group-item sidebar "  data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="pills-home" aria-selected="true"> <span className='material-symbols-outlined sidebarLogo'>home_app_logo</span>Home</li></NavLink>
+                                <NavLink to={'/'} className='link'><li className="list-group-item sidebar "  data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="pills-home" aria-selected="true"> <span className='material-symbols-outlined sidebarLogo'>home_app_logo</span>Home</li></NavLink>
 
                                 <NavLink to={'/profile'} className='link'><li className="list-group-item sidebar "  data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="pills-home" aria-selected="true"> <span className='material-symbols-outlined sidebarLogo'>settings_account_box</span>Profile</li></NavLink>
 

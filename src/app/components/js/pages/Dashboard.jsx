@@ -20,62 +20,63 @@ function Dashboard() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        //setXsd(JSON.parse(localStorage.getItem("XSD")));
 
+        return () => fetchData();
 
     }, []);
 
-    //   const fetchData = async () => {
-    //   const apiUrl = 'https://api.example.com/data';
-    //   const token = 'yourAccessToken'; // Replace with your actual access token
+    const fetchData = async () => {
 
-    //   try {
-    //     const response = await fetch(`${BASE_URL}/xsd/`, {
-    //       method: 'GET',
-    //       headers: {
-    //         'Authorization': `Bearer ${getToken()}`,
-    //         'Content-Type': 'application/json',
-    //         // You may need to include other headers depending on the API requirements
-    //       },
-    //     });
+        try {
+            if (getToken()) {
+                const response = await fetch(`${BASE_URL}/xsd/`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${getToken()}`,
+                        'Content-Type': 'application/json',
+                        // You may need to include other headers depending on the API requirements
+                    },
+                });
 
-    //     if (!response.ok) {
-    //       throw new Error(`HTTP error! Status: ${response.status}`);
-    //     }
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
 
-    //     const result = await response.json();
-    //     localStorage.setItem('xsd',JSON.stringify(result));
-    //     setXsd(result);
-    //     console.log("CCC : "+xsd);
-    //     console.log("DD : "+JSON.parse(localStorage.getItem('xsd')));
-    //   } catch (error) {
-    //     console.log(error.message)
-    //     setError(error.message);
-    //   }
-    // };
+                const result = await response.json();
+
+                setXsd(result);
+                //console.log("CCC : " + xsd);
+            }
 
 
-
-    useEffect(() => {
-        return () => {
-
-            console.log("HHH")
-            loadAllXsd().then(data => {
-                // const JsonData = JSON.parse(JSON.stringify(data));
-                setXsd(data)
-                //localStorage.setItem("XSD",JSON.stringify(data));
-                // setXsd(JSON.parse(localStorage.getItem('XSD')));
-                // this.xsd = JSON.parse(localStorage.getItem('XSD'));
-                // console.log("XSD : "+xsd);
-            }).catch(error => {
-                console.log(error);
-                toast.error("Error in loading xsd")
-
-            })
+        } catch (error) {
+            console.log(error.message)
+            // setError(error.message);
         }
-    }, [])
+    };
 
-    console.log("DDD : XSD : " + xsd);
+
+
+    // useEffect(() => {
+    //     return () => {
+
+    //         // console.log("HHH")
+    //         loadAllXsd().then(data => {
+    //             // const JsonData = JSON.parse(JSON.stringify(data));
+    //             setXsd(data)
+    //             //localStorage.setItem("XSD",JSON.stringify(data));
+    //             // setXsd(JSON.parse(localStorage.getItem('XSD')));
+    //             // this.xsd = JSON.parse(localStorage.getItem('XSD'));
+    //             // console.log("XSD : "+xsd);
+    //         }).catch(error => {
+    //             console.log(error);
+    //             toast.error("Error in loading xsd")
+
+    //         })
+    //     }
+    // }, [])
+
+    // console.log("DDD : XSD : " + xsd);
 
     // const fun = async() => {
     //     // console.log("HHH")
@@ -121,26 +122,27 @@ function Dashboard() {
 
                 {
                     xsd.map((item, index) =>
+
                     (
-                        <>
-                            <div key={index} className="col ">
-                                <NavLink className="card xsd-card">
 
-                                    <div className="card-body">
-                                        <h5 className="card-title">{item.xsdName}</h5>
-                                        <p className="card-text">
-                                            <i><b>XSD File Name :</b></i> {item.fileName}
-                                        </p>
-                                    </div>
-                                </NavLink>
-                            </div>
+                <div key={index} className="col ">
+                    <NavLink to={`/${item.xsdName}`} className="card xsd-card">
 
-                        </>
-
-                    )
+                        <div className="card-body">
+                            <h5 className="card-title">{item.xsdName}</h5>
+                            <p className="card-text">
+                                <i><b>XSD File Name :</b></i> {item.fileName}
+                            </p>
+                        </div>
+                    </NavLink>
+                </div>
 
 
-                    )
+
+                )
+
+
+                )
                 }
             </div>
 

@@ -1,10 +1,10 @@
 //isLoggedIn=>
 
 export const isLoggedIn = () => {
-  // let data = localStorage.getItem("data");
-  // if (data != null || data != undefined) return true;
-  // else return false;
-  return sessionStorage.getItem('isLogin');
+  let data = localStorage.getItem("data");
+  if (data != null || data != undefined) return true;
+  else return false;
+  // return sessionStorage.getItem('isLogin');
 };
 
 //doLogin=> data=>set to localstorage

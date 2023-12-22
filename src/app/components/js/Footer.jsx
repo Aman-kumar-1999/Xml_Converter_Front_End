@@ -1,6 +1,9 @@
 import React from 'react'
 import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
 import { Link } from 'react-router-dom';
+
+import '../css/Footer.css'
+
 function Footer() {
   return (
     <>

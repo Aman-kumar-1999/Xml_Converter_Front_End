@@ -73,9 +73,9 @@ function NavBar() {
             <Link className='navAccountResponsive mt-1 mb-1 float-end' onClick={logout}>
               <span id='logoutIcon' className="material-symbols-outlined">logout</span>&nbsp;<p className='navAccountText'>Logout</p>
             </Link>
-            <Link className='navCartResponsive mt-1 mb-1 float-end' to={'/cart'}>
+            {/* <Link className='navCartResponsive mt-1 mb-1 float-end' to={'/cart'}>
               <span id='shoppingCart' className="material-symbols-outlined">shopping_cart</span>&nbsp;<p className='cartText'>Cart</p>
-            </Link>
+            </Link> */}
           </div>
         ) : (
           <div className='float-end'>
