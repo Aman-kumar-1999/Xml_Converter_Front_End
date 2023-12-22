@@ -10,9 +10,9 @@
 
 import axios from "axios";
 import { getToken } from "../auth";
-export const BASE_URL = "http://localhost:8902";
-// export const BASE_URL = "http://localhost:9292/api/v1";
-// export const BASE_URL = "https://apis.lcwdblogs.online/api/v1";
+// export const BASE_URL = "http://localhost:8902";
+
+export const BASE_URL = "http://35.154.97.243:8902";
 
 export const myAxios = axios.create({
   baseURL: BASE_URL,
