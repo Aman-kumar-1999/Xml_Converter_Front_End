@@ -143,6 +143,7 @@ const Login = () => {
       return;
     }
 
+    setLoading(true)
     //submit the data to server to generate token
     loginUser(formData)
       .then((data) => {
@@ -161,12 +162,14 @@ const Login = () => {
           sessionStorage.setItem('Role', data.USER.authorities[0].authority)
           // sessionStorage.setItem('loginUser', jsonData.USER);
           sessionStorage.setItem('loginUser', JSON.stringify(data.USER));
+          setLoading(false)
           navigate("/");
         });
 
         toast.success("Login Success");
       })
       .catch((error) => {
+        setLoading(false)
         console.log(error);
         if (error.response.status == 400 || error.response.status == 404) {
           toast.error(error.response.data.message);
@@ -213,7 +216,25 @@ const Login = () => {
                       `${isActive ? "link-color" : "nav-link"}`
                     } to={'/forgotPassword'}>Forgot Password</NavLink>
                 </h6>
-                <button className='button mt-5 form-control' onClick={handleFormSubmit}>Login</button>
+                {
+                  loading ?
+                    (
+                      <>
+                        <h5 className='pt-5 mt-5'>
+
+                          <img style={{ width: 40, height: 40 }} src='spinner.gif' />
+
+                        </h5>
+                      </>
+                    ) :
+                    (
+                      <>  
+                         
+                          <button className='button mt-5 form-control' onClick={handleFormSubmit}>Login</button>
+                      </>
+                    )
+                }
+                
                 {/* <button type="reset" className='button mt-3 form-control'  >Sign Up</button> */}
                 {/* <h6 className='forgot-password'><Link style={{ color: 'red' }} to={'/forgotPassword'}>Sign Up</Link></h6> */}
               </form>
