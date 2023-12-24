@@ -21,7 +21,7 @@ function Dashboard() {
 
     useEffect(() => {
 
-        return () => fetchData();
+        return () => createProductsInBulk();
 
     }, []);
 
@@ -50,10 +50,39 @@ function Dashboard() {
 
 
         } catch (error) {
-            console.log(error.message)
+            console.log(error)
             // setError(error.message);
         }
     };
+
+    const createProductsInBulk = async () => {
+        //event.preventDefault();
+    
+    
+        try {
+          //setLoading(true)
+          //const formData = new FormData();
+    
+          const response = await axios.get(`${BASE_URL}/xsd/`, {
+            headers: {
+              'Authorization': `Bearer ${getToken()}`,
+            }
+          });
+    
+          if (response.status == 200) {
+    
+            
+            setXsd(response.data)
+    
+          }
+    
+        } catch (error) {
+          console.error(error);
+          setLoading(false)
+          toast.error("Not loaded");
+    
+        }
+      };
 
 
 

@@ -92,7 +92,10 @@ export default function MobileSideBar() {
                                 <NavLink to={'/profile'} className='link'><li className="list-group-item sidebar "  data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="pills-home" aria-selected="true"> <span className='material-symbols-outlined sidebarLogo'>settings_account_box</span>Profile</li></NavLink>
 
                                 <NavLink to={'/dashboard'} className='link'><li className="list-group-item sidebar "  data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="pills-home" aria-selected="true"> <span className='material-symbols-outlined sidebarLogo'>home_app_logo</span>Dashboard</li></NavLink>
-                        
+                                
+                                <Link to={'/cbexii'} className='link'><li className="list-group-item sidebar " data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="pills-home" aria-selected="true"> <span className='material-symbols-outlined sidebarLogo'>home_app_logo</span>CBE-XII</li></Link>
+                                <Link to={'/cbexiii'} className='link'><li className="list-group-item sidebar " data-bs-dismiss="offcanvas" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="pills-home" aria-selected="true"> <span className='material-symbols-outlined sidebarLogo'>home_app_logo</span>CBE-XIII</li></Link>
+
 
                             </div>
 
