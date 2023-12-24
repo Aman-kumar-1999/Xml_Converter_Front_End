@@ -161,7 +161,7 @@ const Login = () => {
           sessionStorage.setItem('Role', data.USER.authorities[0].authority)
           // sessionStorage.setItem('loginUser', jsonData.USER);
           sessionStorage.setItem('loginUser', JSON.stringify(data.USER));
-          navigate("/dashboard");
+          navigate("/");
         });
 
         toast.success("Login Success");
